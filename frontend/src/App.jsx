@@ -49,6 +49,7 @@ const experience = [
       'Analyze operational data to identify issues and irregularities.',
       'Coordinate operational activities to support uninterrupted railway services.',
     ],
+    technologies: ['Railway Systems', 'Operations Monitoring', 'Data Analytics', 'Incident Coordination'],
   },
   {
     role: 'Full Stack Developer',
@@ -59,6 +60,7 @@ const experience = [
       'Developed responsive web applications using full-stack technologies.',
       'Contributed to frontend and backend development as part of development projects.',
     ],
+    technologies: ['React.js', 'Node.js', 'Express.js', 'JavaScript', 'CSS3'],
   },
 ];
 
@@ -472,6 +474,13 @@ function App() {
                           <li key={item}>{item}</li>
                         ))}
                       </ul>
+                      {entry.technologies && (
+                        <div className="timeline-tech-stack">
+                          {entry.technologies.map((tech) => (
+                            <span key={tech} className="tech-badge">{tech}</span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </article>
                 ))}
