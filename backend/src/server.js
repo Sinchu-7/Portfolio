@@ -44,8 +44,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 10,
+  windowMs: env.rateLimitWindowMs,
+  max: env.rateLimitMax,
   standardHeaders: true,
   legacyHeaders: false,
   message: {
