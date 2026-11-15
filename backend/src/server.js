@@ -8,12 +8,9 @@ const dotenv = require('dotenv');
 
 const env = require('./config/env');
 const { connectDatabase } = require('./config/db');
-const ContactMessage = require('./models/ContactMessage');
-const { contactValidationRules, validateContact } = require('./validators/contactValidator');
-const { sanitizeInput } = require('./middleware/security');
 const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
-const { sendContactEmail } = require('./utils/emailService');
 const healthRoutes = require('./routes/healthRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 const app = express();
 const port = env.port;
@@ -58,30 +55,7 @@ const apiLimiter = rateLimit({
 app.use('/api', apiLimiter);
 
 app.use('/api/health', healthRoutes);
-
-app.post('/api/contact', contactValidationRules, validateContact, sanitizeInput, async (req, res, next) => {
-  try {
-    const { name, email, subject, message } = req.body;
-
-    if (mongoose.connection.readyState === 1) {
-      await ContactMessage.create({ name, email, subject, message });
-    }
-
-    try {
-      await sendContactEmail({ name, email, subject, message });
-    } catch (emailError) {
-      console.warn('Optional email notification is unavailable:', emailError.message);
-    }
-
-    res.status(201).json({
-      success: true,
-      message: 'Your message has been sent successfully.',
-      database: mongoose.connection.readyState === 1 ? 'stored' : 'skipped',
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+app.use('/api/contact', contactRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
