@@ -1,0 +1,17 @@
+{
+  "name": "Sinchana Poojary Portfolio",
+  "short_name": "Sinchana",
+  "description": "Professional portfolio showcasing engineering experience, AI/ML projects, and contact details.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0f17",
+  "theme_color": "#0d0f17",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
