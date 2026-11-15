@@ -25,6 +25,7 @@ import {
   X,
 } from 'lucide-react';
 import ErrorBoundary from './components/ErrorBoundary';
+import BackToTop from './components/BackToTop';
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -626,11 +627,7 @@ function App() {
           </div>
         </footer>
 
-        {showBackToTop ? (
-          <button type="button" className="fab-back" aria-label="Back to top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <ArrowUpRight size={18} />
-          </button>
-        ) : null}
+        <BackToTop show={showBackToTop} />
       </div>
     </ErrorBoundary>
   );

@@ -1192,3 +1192,32 @@ button {
   top: 16px;
   outline: 2px solid #ffffff;
 }
+
+/* Floating Back to Top Button */
+.fab-back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--accent, #6366f1);
+  color: #0b0f17;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, background 0.2s ease;
+  z-index: 1000;
+}
+
+.fab-back-to-top:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.1);
+}
+
+.fab-back-to-top:active {
+  transform: translateY(0);
+}
