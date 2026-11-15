@@ -125,6 +125,16 @@ const certifications = [
 
 const hackathons = ['GeeksforGeeks Hackathon — 2026', 'EPOCH Hackathon — 2026', 'Hack Buzz Hackathon — 2026'];
 
+const starParticles = Array.from({ length: 42 }, (_, index) => ({
+  id: index,
+  left: `${(index * 13.7) % 100}%`,
+  top: `${(index * 17.3) % 100}%`,
+  size: `${(index % 3) + 2}px`,
+  duration: `${7 + (index % 8)}s`,
+  delay: `${(index % 9) * 0.8}s`,
+  opacity: 0.35 + (index % 5) * 0.12,
+}));
+
 function SectionHeader({ eyebrow, title, description }) {
   return (
     <div className="section-header">
@@ -280,6 +290,24 @@ function App() {
   return (
     <ErrorBoundary>
       <div className="page-shell">
+        <div className="galaxy-bg" aria-hidden="true">
+          {starParticles.map((star) => (
+            <span
+              key={star.id}
+              className="star-particle"
+              style={{
+                left: star.left,
+                top: star.top,
+                width: star.size,
+                height: star.size,
+                animationDuration: star.duration,
+                animationDelay: star.delay,
+                opacity: star.opacity,
+              }}
+            />
+          ))}
+        </div>
+
         <header className="site-header">
           <div className="container nav-bar">
             <a href="#home" className="brand-mark" onClick={(event) => { event.preventDefault(); handleJump('home'); }}>
