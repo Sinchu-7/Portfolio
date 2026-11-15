@@ -1256,3 +1256,41 @@ button {
   border-color: transparent;
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
 }
+
+/* Copy Button */
+.contact-detail-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.contact-icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.copy-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 6px;
+  color: #e2e8f0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copy-button:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+.copied-icon {
+  color: #86efac;
+}

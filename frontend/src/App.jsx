@@ -6,9 +6,11 @@ import {
   Award,
   Briefcase,
   Building2,
+  Check,
   CheckCircle2,
   ChevronRight,
   Code2,
+  Copy,
   Cpu,
   Database,
   Download,
@@ -254,6 +256,19 @@ function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [copiedEmail, setCopiedEmail] = useState(false);
+
+  const handleCopyEmail = async () => {
+    try {
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText('sinchhh09@gmail.com');
+        setCopiedEmail(true);
+        setTimeout(() => setCopiedEmail(false), 2000);
+      }
+    } catch {
+      // Ignore clipboard write failures in unsupported test environments
+    }
+  };
 
   const categories = ['All', 'Computer Vision', 'AI for Agriculture', 'Business Intelligence'];
   const filteredProjects =
@@ -604,7 +619,19 @@ function App() {
               <div className="contact-copy">
                 <SectionHeader eyebrow="Contact" title="Have an Idea? Let&apos;s Build Something Meaningful." />
                 <div className="contact-details">
-                  <p><Mail size={18} /> sinchhh09@gmail.com</p>
+                  <p className="contact-detail-row">
+                    <span className="contact-icon-text"><Mail size={18} /> sinchhh09@gmail.com</span>
+                    <button
+                      type="button"
+                      className="copy-button"
+                      onClick={handleCopyEmail}
+                      aria-label="Copy email address"
+                      title="Copy email address"
+                    >
+                      {copiedEmail ? <Check size={14} className="copied-icon" /> : <Copy size={14} />}
+                      <span className="copy-label">{copiedEmail ? 'Copied!' : 'Copy'}</span>
+                    </button>
+                  </p>
                   <p><MapPin size={18} /> Bangalore, India</p>
                   <p><Phone size={18} /> 7760489756</p>
                 </div>
