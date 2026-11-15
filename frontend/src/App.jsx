@@ -308,6 +308,8 @@ function App() {
           ))}
         </div>
 
+        <a href="#main-content" className="skip-to-content">Skip to main content</a>
+
         <header className="site-header">
           <div className="container nav-bar">
             <a href="#home" className="brand-mark" onClick={(event) => { event.preventDefault(); handleJump('home'); }}>
@@ -333,7 +335,7 @@ function App() {
           </div>
         </header>
 
-        <main>
+        <main id="main-content">
           <section id="home" className="hero section">
             <div className="container hero-grid">
               <motion.div className="hero-copy" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }}>
