@@ -13,6 +13,7 @@ const { contactValidationRules, validateContact } = require('./validators/contac
 const { sanitizeInput } = require('./middleware/security');
 const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
 const { sendContactEmail } = require('./utils/emailService');
+const healthRoutes = require('./routes/healthRoutes');
 
 const app = express();
 const port = env.port;
@@ -56,23 +57,7 @@ const apiLimiter = rateLimit({
 
 app.use('/api', apiLimiter);
 
-app.get('/api/health', (req, res) => {
-  const memoryUsage = process.memoryUsage();
-  res.status(200).json({
-    success: true,
-    status: 'ok',
-    uptime: Math.floor(process.uptime()),
-    environment: env.nodeEnv,
-    nodeVersion: process.version,
-    memory: {
-      rss: `${Math.round(memoryUsage.rss / 1024 / 1024)}MB`,
-      heapUsed: `${Math.round(memoryUsage.heapUsed / 1024 / 1024)}MB`,
-    },
-    database: mongoose.connection.readyState === 1 ? 'connected' : 'not_connected',
-    message: 'Portfolio API is running.',
-    timestamp: new Date().toISOString(),
-  });
-});
+app.use('/api/health', healthRoutes);
 
 app.post('/api/contact', contactValidationRules, validateContact, sanitizeInput, async (req, res, next) => {
   try {
