@@ -1,0 +1,5 @@
+# Robots.txt for Sinchana Poojary Portfolio
+User-agent: *
+Allow: /
+
+Sitemap: https://sinchu-7.github.io/Portfolio/sitemap.xml
