@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
+const env = require('./config/env');
 const { connectDatabase } = require('./config/db');
 const ContactMessage = require('./models/ContactMessage');
 const { contactValidationRules, validateContact } = require('./validators/contactValidator');
@@ -13,15 +14,13 @@ const { sanitizeInput } = require('./middleware/security');
 const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
 const { sendContactEmail } = require('./utils/emailService');
 
-dotenv.config();
-
 const app = express();
-const port = process.env.PORT || 5000;
+const port = env.port;
 const allowedOrigins = [
   'http://localhost:5173',
   'http://127.0.0.1:5173',
   'http://localhost:4173',
-  process.env.CLIENT_URL,
+  env.clientUrl,
 ].filter(Boolean);
 
 app.use(

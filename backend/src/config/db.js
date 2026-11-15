@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const env = require('./env');
 
 async function connectDatabase() {
-  const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
+  const mongoUri = env.mongodbUri || process.env.MONGO_URI;
 
   if (!mongoUri) {
     console.warn('MongoDB URI not configured. Database persistence is disabled in this environment.');
