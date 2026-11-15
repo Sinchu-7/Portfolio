@@ -7,20 +7,32 @@
     "doc": "docs"
   },
   "scripts": {
+    "install:all": "npm run install:frontend && npm run install:backend",
     "install:frontend": "npm --prefix frontend install",
     "install:backend": "npm --prefix backend install",
     "dev:frontend": "npm --prefix frontend run dev",
     "dev:backend": "npm --prefix backend run dev",
     "build": "npm --prefix frontend run build",
     "test": "npm --prefix frontend test && npm --prefix backend test",
-    "lint": "npm --prefix frontend run lint"
+    "test:frontend": "npm --prefix frontend test",
+    "test:backend": "npm --prefix backend test",
+    "lint": "npm --prefix frontend run lint",
+    "check:all": "npm run lint && npm run test && npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sinchu-7/Portfolio.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "portfolio",
+    "fullstack",
+    "react",
+    "express",
+    "vite",
+    "mongodb",
+    "machine-learning"
+  ],
+  "author": "Sinchana Poojary <sinchhh09@gmail.com>",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
