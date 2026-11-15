@@ -253,6 +253,13 @@ function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+
+  const categories = ['All', 'Computer Vision', 'AI for Agriculture', 'Business Intelligence'];
+  const filteredProjects =
+    selectedCategory === 'All'
+      ? projects
+      : projects.filter((project) => project.category === selectedCategory);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -465,8 +472,23 @@ function App() {
                 description="Each project focuses on solving a real challenge using applied AI, data workflows, and engineering design principles."
               />
 
+              <div className="filter-pill-group" role="tablist" aria-label="Project category filters">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    type="button"
+                    role="tab"
+                    aria-selected={selectedCategory === category}
+                    className={`filter-pill ${selectedCategory === category ? 'active' : ''}`}
+                    onClick={() => setSelectedCategory(category)}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+
               <div className="project-stack">
-                {projects.map((project) => (
+                {filteredProjects.map((project) => (
                   <article className={`project-card ${project.accent}`} key={project.title}>
                     <div className="project-visual" aria-hidden="true">
                       <div className="visual-device">
