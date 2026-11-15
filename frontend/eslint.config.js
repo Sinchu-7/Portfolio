@@ -18,10 +18,12 @@ export default [
       globals: {
         window: 'readonly',
         document: 'readonly',
+        navigator: 'readonly',
         console: 'readonly',
         fetch: 'readonly',
         IntersectionObserver: 'readonly',
         setTimeout: 'readonly',
+        clearTimeout: 'readonly',
         describe: 'readonly',
         it: 'readonly',
         expect: 'readonly',
@@ -33,6 +35,8 @@ export default [
       import: importPlugin,
     },
     rules: {
+      'react/jsx-uses-react': 'error',
+      'react/jsx-uses-vars': 'error',
       'react/react-in-jsx-scope': 'off',
       'react/no-unescaped-entities': 'off',
       'react/prop-types': 'off',
