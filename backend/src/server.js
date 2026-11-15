@@ -9,6 +9,7 @@ const dotenv = require('dotenv');
 const env = require('./config/env');
 const { connectDatabase } = require('./config/db');
 const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
+const { requestTimer } = require('./middleware/requestTimer');
 const healthRoutes = require('./routes/healthRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 
@@ -37,6 +38,7 @@ app.use(
 );
 
 app.use(helmet({ crossOriginResourcePolicy: false, contentSecurityPolicy: false }));
+app.use(requestTimer);
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
