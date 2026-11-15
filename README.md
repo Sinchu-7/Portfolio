@@ -1,143 +1,140 @@
-# Sinchana Poojary Portfolio
+ï»¿# Sinchana Poojary Portfolio
 
-A full-stack professional portfolio for Sinchana Poojary, built with a React + Vite frontend and an Express + MongoDB backend. The project showcases engineering experience, AI/ML work, projects, education, certifications, and a working contact form.
+A full-stack, production-ready portfolio application built with a React + Vite frontend and an Express + MongoDB backend. Showcases professional engineering experience, AI/ML research projects, education, certifications, and an interactive contact form.
+
+---
 
 ## Features
-- Editorial-style single-page portfolio design
-- Responsive navigation and mobile drawer menu
-- Experience, project, skill, education, and achievement sections
-- Contact form with client-side validation and API submission
-- Express backend with health check and contact endpoint
-- Rate limiting, sanitization, CORS, and security headers
-- Optional SMTP email notifications controlled by environment variables
-- SEO metadata and accessible UI elements
+- **Modern Responsive Design**: Single-page portfolio with smooth section scrolling, mobile drawer menu, and subtle particle background.
+- **Project Filtering**: Interactive filter tabs allowing visitors to explore projects by category (Computer Vision, AI for Agriculture, Business Intelligence).
+- **Interactive Experience Timeline**: Detailed career and internship milestones with technology tag badges.
+- **Contact Form**: Client-side validated form communicating with a secure backend API, rate limiting, and optional SMTP notification.
+- **Accessibility & UX**: Includes WCAG-compliant skip-to-content keyboard link, back-to-top floating control, and one-click email clipboard copy.
+- **Modular Express Backend**: Decoupled routes, centralized environment configuration, performance timing middleware (`X-Response-Time`), and health monitoring.
+- **Robust Automated Testing**: Unit and integration test suites using Vitest, React Testing Library, and Supertest.
+- **Continuous Integration**: GitHub Actions workflow validating multi-project linting, tests, and production builds on push and pull requests.
 
-## Project structure
+---
+
+## Project Structure
 
 ```text
 Portfolio/
-+-- frontend/
-¦   +-- public/
-¦   +-- src/
-¦   +-- index.html
-¦   +-- package.json
-¦   +-- vite.config.js
-¦   +-- eslint.config.js
++-- .github/
+|   +-- ISSUE_TEMPLATE/
+|   |   +-- bug_report.md
+|   |   +-- feature_request.md
+|   +-- workflows/
+|   |   +-- ci.yml
+|   +-- pull_request_template.md
 +-- backend/
-¦   +-- src/
-¦   +-- tests/
-¦   +-- .env.example
-¦   +-- package.json
-¦   +-- vitest.config.js
-+-- .github/workflows/
-+-- .gitignore
-+-- README.md
+|   +-- src/
+|   |   +-- config/ (db.js, env.js)
+|   |   +-- middleware/ (errorHandler.js, requestTimer.js, security.js)
+|   |   +-- models/ (ContactMessage.js)
+|   |   +-- routes/ (contactRoutes.js, healthRoutes.js)
+|   |   +-- utils/ (emailService.js)
+|   |   +-- validators/ (contactValidator.js)
+|   |   +-- server.js
+|   +-- tests/ (contact.test.js, errorHandler.test.js, health.test.js, notFound.test.js)
+|   +-- .env.example
+|   +-- package.json
+|   +-- vitest.config.js
++-- docs/
+|   +-- architecture.md
+|   +-- deployment.md
+|   +-- qa-checklist.md
+|   +-- troubleshooting.md
++-- frontend/
+|   +-- public/ (favicon.svg, robots.txt, sitemap.xml, site.webmanifest)
+|   +-- src/
+|   |   +-- components/ (BackToTop.jsx, ErrorBoundary.jsx, Toast.jsx)
+|   |   +-- test/ (ContactForm.test.jsx, ErrorBoundary.test.jsx, setup.js)
+|   |   +-- App.jsx
+|   |   +-- App.test.jsx
+|   |   +-- main.jsx
+|   |   +-- styles.css
+|   +-- eslint.config.js
+|   +-- index.html
+|   +-- package.json
+|   +-- vite.config.js
++-- .prettierrc
++-- .prettierignore
 +-- package.json
++-- README.md
 ```
 
-## Tech stack
+---
 
-Frontend:
-- React
-- Vite
-- JavaScript
-- CSS Modules / custom CSS
-- Framer Motion
-- Lucide icons
+## Tech Stack
 
-Backend:
-- Node.js
-- Express
-- MongoDB + Mongoose
-- Helmet
-- CORS
-- Express Rate Limit
-- Nodemailer
+- **Frontend**: React 18, Vite, Framer Motion, Lucide React, Modern CSS3
+- **Backend**: Node.js, Express, MongoDB + Mongoose, Helmet, CORS, Express Rate Limit, Nodemailer
+- **Testing**: Vitest, React Testing Library, Supertest
+- **Quality & CI**: ESLint, Prettier, GitHub Actions CI
 
-Testing:
-- Vitest
-- Testing Library
-- Supertest
+---
 
-## Local setup
+## Quick Start & Setup
 
-1. Install project dependencies:
-
+### 1. Install Dependencies
 ```bash
-cd frontend && npm install
-cd ../backend && npm install
+npm run install:all
 ```
+*(or run `npm install` inside `frontend/` and `backend/` separately)*
 
-2. Configure environment variables:
-
+### 2. Configure Backend Environment
 ```bash
 cp backend/.env.example backend/.env
 ```
 
-3. Start frontend and backend in separate terminals:
-
+### 3. Start Development Servers
+Run frontend and backend simultaneously or in separate terminal sessions:
 ```bash
-cd frontend && npm run dev
-cd backend && npm run dev
+# Frontend (http://localhost:5173)
+npm run dev:frontend
+
+# Backend (http://localhost:5000)
+npm run dev:backend
 ```
 
-4. Open the frontend at `http://localhost:5173`.
+---
 
-## Production build
+## Available Scripts
 
-```bash
-cd frontend && npm run build
-cd backend && npm run start
-```
+From the repository root:
+- `npm run check:all`: Runs linting, all tests, and frontend production build.
+- `npm run test`: Runs test suites for both frontend and backend.
+- `npm run test:frontend`: Runs frontend Vitest suite.
+- `npm run test:backend`: Runs backend Vitest suite.
+- `npm run lint`: Runs ESLint across frontend source code.
+- `npm run build`: Compiles optimized production bundle in `frontend/dist`.
 
-## Backend API
+---
 
-### Health check
-- GET `/api/health`
+## Backend API Endpoints
 
-### Contact form
-- POST `/api/contact`
+### Health Check
+- `GET /api/health`
+- Returns uptime, environment, node version, memory metrics, and database connectivity.
 
-Request body:
-
+### Contact Submission
+- `POST /api/contact`
+- Payload:
 ```json
 {
   "name": "Sinchana",
   "email": "sinchhh09@gmail.com",
-  "subject": "Project inquiry",
-  "message": "I would like to discuss a collaboration."
+  "subject": "Project Inquiry",
+  "message": "Hello, I would like to discuss an opportunity."
 }
 ```
 
-## Environment variables
+---
 
-See `backend/.env.example` for configuration details.
+## Documentation Links
 
-- `PORT`
-- `CLIENT_URL`
-- `MONGODB_URI`
-- `SMTP_HOST`
-- `SMTP_PORT`
-- `SMTP_USER`
-- `SMTP_PASS`
-- `SMTP_FROM`
-- `NODE_ENV`
-
-SMTP fields are optional; the form still works without email credentials, but email delivery is skipped when SMTP is not configured.
-
-## Deployment
-
-- Frontend: deploy to Vercel or Netlify
-- Backend: deploy to Render or any Node-compatible hosting
-- Database: MongoDB Atlas
-
-## Testing
-
-```bash
-cd frontend && npm test
-cd backend && npm test
-```
-
-## GitHub workflow
-
-A CI workflow is configured in `.github/workflows/ci.yml` to install dependencies, run frontend/backend tests, and validate frontend builds.
+- `docs/architecture.md`
+- `docs/deployment.md`
+- `docs/troubleshooting.md`
+- `docs/qa-checklist.md`
