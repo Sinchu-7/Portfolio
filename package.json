@@ -1,0 +1,30 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "A full-stack professional portfolio for Sinchana Poojary, built with a React + Vite frontend and an Express + MongoDB backend. The project showcases engineering experience, AI/ML work, projects, education, certifications, and a working contact form.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "install:frontend": "npm --prefix frontend install",
+    "install:backend": "npm --prefix backend install",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "build": "npm --prefix frontend run build",
+    "test": "npm --prefix frontend test && npm --prefix backend test",
+    "lint": "npm --prefix frontend run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sinchu-7/Portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Sinchu-7/Portfolio/issues"
+  },
+  "homepage": "https://github.com/Sinchu-7/Portfolio#readme"
+}
