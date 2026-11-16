@@ -347,6 +347,17 @@ function App() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setMobileOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileOpen]);
+
   const handleJump = (targetId) => {
     const target = document.getElementById(targetId);
     if (target) {
@@ -384,7 +395,7 @@ function App() {
               SINCHANA POOJARY
             </a>
 
-            <nav className={`nav-links ${mobileOpen ? 'open' : ''}`} aria-label="Main navigation">
+            <nav id="main-nav-links" className={`nav-links ${mobileOpen ? 'open' : ''}`} aria-label="Main navigation">
               {navItems.map((item) => (
                 <button
                   type="button"
@@ -397,7 +408,14 @@ function App() {
               ))}
             </nav>
 
-            <button type="button" className="menu-toggle" aria-label="Toggle navigation" onClick={() => setMobileOpen((state) => !state)}>
+            <button
+              type="button"
+              className="menu-toggle"
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileOpen}
+              aria-controls="main-nav-links"
+              onClick={() => setMobileOpen((state) => !state)}
+            >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
