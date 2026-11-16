@@ -186,7 +186,26 @@ function ContactForm() {
     setStatus({ type: 'idle', message: '' });
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const isHttps = typeof window !== 'undefined' && window.location.protocol === 'https:';
+      const configuredApi = import.meta.env.VITE_API_URL;
+      const apiUrl = configuredApi || (isHttps ? '' : 'http://localhost:5000');
+
+      if (!apiUrl) {
+        const mailtoLink = `mailto:sinchhh09@gmail.com?subject=${encodeURIComponent(
+          formData.subject || 'Portfolio Inquiry',
+        )}&body=${encodeURIComponent(
+          `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`,
+        )}`;
+        window.location.href = mailtoLink;
+        setStatus({
+          type: 'success',
+          message: 'Opening your default email client to send this message directly to Sinchana.',
+        });
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setErrors({});
+        return;
+      }
+
       const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -202,7 +221,16 @@ function ContactForm() {
       setFormData({ name: '', email: '', subject: '', message: '' });
       setErrors({});
     } catch (error) {
-      setStatus({ type: 'error', message: error.message || 'Something went wrong while sending the form.' });
+      const fallbackMailto = `mailto:sinchhh09@gmail.com?subject=${encodeURIComponent(
+        formData.subject || 'Portfolio Inquiry',
+      )}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`,
+      )}`;
+      setStatus({
+        type: 'error',
+        message: `${error.message || 'Unable to reach backend API.'} You can also send directly via email:`,
+        mailto: fallbackMailto,
+      });
     } finally {
       setLoading(false);
     }
@@ -240,7 +268,16 @@ function ContactForm() {
         {loading ? 'Sending...' : 'Submit Message'}
       </button>
 
-      {status.message ? <p className={`form-status ${status.type}`}>{status.message}</p> : null}
+      {status.message ? (
+        <div className={`form-status ${status.type}`}>
+          <p>{status.message}</p>
+          {status.mailto ? (
+            <a href={status.mailto} className="mailto-fallback-link">
+              Send via email application &rarr;
+            </a>
+          ) : null}
+        </div>
+      ) : null}
     </form>
   );
 }
