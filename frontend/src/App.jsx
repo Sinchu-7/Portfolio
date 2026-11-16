@@ -66,6 +66,7 @@ const projects = [
     accent: 'safety',
     metric: '17',
     detail: 'Body connections',
+    repoUrl: 'https://github.com/Sinchu-7',
   },
   {
     title: 'PLANT DISEASE DETECTION',
@@ -76,6 +77,7 @@ const projects = [
     accent: 'plant',
     metric: 'AI',
     detail: 'Image-driven detection',
+    repoUrl: 'https://github.com/Sinchu-7',
   },
   {
     title: 'LOOP — CUSTOMER REVIEW ANALYTICS PLATFORM',
@@ -86,6 +88,7 @@ const projects = [
     accent: 'loop',
     metric: 'Dash',
     detail: 'Customer insights',
+    repoUrl: 'https://github.com/Sinchu-7',
   },
 ];
 
@@ -558,6 +561,26 @@ function App() {
                         {project.tags.map((tag) => (
                           <span key={tag}>{tag}</span>
                         ))}
+                      </div>
+
+                      <div className="project-links">
+                        <a
+                          href={project.repoUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="project-link-btn"
+                          aria-label={`View ${project.title} repository`}
+                        >
+                          <GitBranch size={14} /> Repository
+                        </a>
+                        <button
+                          type="button"
+                          className="project-link-btn outline"
+                          onClick={() => handleJump('contact')}
+                          aria-label={`Inquire about ${project.title}`}
+                        >
+                          <ArrowUpRight size={14} /> Inquire
+                        </button>
                       </div>
                     </div>
                   </article>

@@ -666,6 +666,46 @@ button {
   margin-top: 18px;
 }
 
+.project-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.project-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #0b0c10;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.project-link-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.project-link-btn.outline {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.project-link-btn.outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .tag-list span,
 .skill-list span,
 .chip-card,
