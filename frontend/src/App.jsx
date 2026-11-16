@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import ErrorBoundary from './components/ErrorBoundary';
 import BackToTop from './components/BackToTop';
+import ProjectModal from './components/ProjectModal';
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -291,6 +292,7 @@ function App() {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [activeModalProject, setActiveModalProject] = useState(null);
 
   const handleCopyEmail = async () => {
     try {
@@ -576,6 +578,14 @@ function App() {
                         <button
                           type="button"
                           className="project-link-btn outline"
+                          onClick={() => setActiveModalProject(project)}
+                          aria-label={`View details for ${project.title}`}
+                        >
+                          Deep Dive
+                        </button>
+                        <button
+                          type="button"
+                          className="project-link-btn outline"
                           onClick={() => handleJump('contact')}
                           aria-label={`Inquire about ${project.title}`}
                         >
@@ -737,6 +747,11 @@ function App() {
           </div>
         </footer>
 
+        <ProjectModal
+          project={activeModalProject}
+          onClose={() => setActiveModalProject(null)}
+          onInquire={() => handleJump('contact')}
+        />
         <BackToTop show={showBackToTop} />
       </div>
     </ErrorBoundary>
