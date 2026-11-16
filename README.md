@@ -1,4 +1,4 @@
-﻿# Sinchana Poojary Portfolio
+# Sinchana Poojary Portfolio
 
 [![CI](https://github.com/Sinchu-7/Portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/Sinchu-7/Portfolio/actions/workflows/ci.yml)
 [![Deploy to GitHub Pages](https://github.com/Sinchu-7/Portfolio/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/Sinchu-7/Portfolio/actions/workflows/deploy-pages.yml)

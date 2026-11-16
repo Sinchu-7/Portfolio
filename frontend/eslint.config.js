@@ -24,6 +24,7 @@ export default [
         IntersectionObserver: 'readonly',
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
+        process: 'readonly',
         describe: 'readonly',
         it: 'readonly',
         expect: 'readonly',
