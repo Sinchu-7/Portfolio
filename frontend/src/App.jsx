@@ -21,6 +21,7 @@ import {
 import ErrorBoundary from './components/ErrorBoundary';
 import BackToTop from './components/BackToTop';
 import ProjectModal from './components/ProjectModal';
+import Toast from './components/Toast';
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -293,12 +294,20 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [activeModalProject, setActiveModalProject] = useState(null);
+  const [toast, setToast] = useState(null);
+
+  useEffect(() => {
+    if (!toast) return;
+    const timer = setTimeout(() => setToast(null), 3500);
+    return () => clearTimeout(timer);
+  }, [toast]);
 
   const handleCopyEmail = async () => {
     try {
       if (navigator.clipboard) {
         await navigator.clipboard.writeText('sinchhh09@gmail.com');
         setCopiedEmail(true);
+        setToast({ message: 'Email copied to clipboard: sinchhh09@gmail.com', type: 'success' });
         setTimeout(() => setCopiedEmail(false), 2000);
       }
     } catch {
@@ -753,6 +762,16 @@ function App() {
           onInquire={() => handleJump('contact')}
         />
         <BackToTop show={showBackToTop} />
+
+        {toast && (
+          <div className="toast-container">
+            <Toast
+              type={toast.type}
+              message={toast.message}
+              onClose={() => setToast(null)}
+            />
+          </div>
+        )}
       </div>
     </ErrorBoundary>
   );

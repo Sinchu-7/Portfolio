@@ -1160,7 +1160,16 @@ button {
   }
 }
 
-/* Toast Notification Component */
+/* Toast Container & Notification */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1050;
+  max-width: 380px;
+  width: calc(100% - 48px);
+}
+
 .toast-notification {
   display: flex;
   align-items: center;
